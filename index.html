@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <input id="upload" type="file">
+</div>
+<script>
+    document.getElementById('upload').addEventListener('change', function (evt) {
+      const form = new FormData()
+      form.append('file', evt.target.files[0])
+      fetch('/uploadfile', {
+        method: 'POST',
+        body: form,
+      }).then(res => {
+        console.log(res)
+      })
+    })
+</script>
+</body>
+</html>

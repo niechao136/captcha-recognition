@@ -4,7 +4,7 @@ from torch.autograd import Variable
 from captcha_cnn_model import CaptchaCNN
 from captcha_dataset import get_train_data_loader
 
-num_epochs = 30
+num_epochs = 10
 batch_size = 100
 learning_rate = 0.001
 

@@ -40,4 +40,18 @@ def get_train_data_loader():
 
 def get_test_data_loader():
     dataset = CaptchaDateset(TEST_DATASET_PATH, transform=trans)
-    return DataLoader(dataset, batch_size=1, shuffle=True)
+    return DataLoader(dataset, batch_size=64, shuffle=True)
+
+
+def get_test_item(path):
+    image_name = path.split(os.path.sep)[-1]
+    image = Image.open(path)
+    image = trans(image)
+    label = encode(image_name.split('_')[1].split('.')[0])
+    return image, label
+
+
+def get_image(path):
+    image = Image.open(path)
+    image = trans(image)
+    return image

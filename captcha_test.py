@@ -1,10 +1,11 @@
+import os
 import numpy as np
 import torch
 from torch.autograd import Variable
 from captcha_cnn_model import CaptchaCNN
-from captcha_dataset import get_test_data_loader
+from captcha_dataset import get_test_item
 from captcha_encoding import decode
-from captcha_setting import ALL_CHAR_SET, ALL_CHAR_SET_LEN
+from captcha_setting import ALL_CHAR_SET, ALL_CHAR_SET_LEN, TEST_DATASET_PATH
 
 
 def test():
@@ -13,12 +14,13 @@ def test():
     cnn.load_state_dict(torch.load('model.pkl'))
     print("load cnn net.")
 
-    test_dataloader = get_test_data_loader()
+    test_data = [os.path.join(TEST_DATASET_PATH, image_file) for image_file in os.listdir(TEST_DATASET_PATH)]
 
     correct = 0
     total = 0
-    for i, (images, labels) in enumerate(test_dataloader):
-        image = images
+    for path in test_data:
+        images, labels = get_test_item(path)
+        image = images.unsqueeze(0)
         vector = Variable(image)
         predict_label = cnn(vector)
 
@@ -27,8 +29,8 @@ def test():
         c2 = ALL_CHAR_SET[np.argmax(predict_label[0, ALL_CHAR_SET_LEN * 2:ALL_CHAR_SET_LEN * 3].data.numpy())]
         c3 = ALL_CHAR_SET[np.argmax(predict_label[0, ALL_CHAR_SET_LEN * 3:ALL_CHAR_SET_LEN * 4].data.numpy())]
         predict_label = '%s%s%s%s' % (c0, c1, c2, c3)
-        true_label = decode(labels.numpy()[0])
-        total += labels.size(0)
+        true_label = decode(labels[0])
+        total += 1
         if predict_label == true_label:
             correct += 1
         if total % 200 == 0:

@@ -4,7 +4,7 @@ from torch.autograd import Variable
 from captcha_cnn_model import CaptchaCNN
 from captcha_dataset import get_train_data_loader
 
-num_epochs = 10
+num_epochs = 20
 batch_size = 100
 learning_rate = 0.001
 
@@ -28,13 +28,13 @@ def train():
             loss.backward()
             optimizer.step()
             if (i+1) % 10 == 0:
-                print("epoch:", epoch, "step:", i, "loss:", loss.item())
+                print("epoch:", epoch, "step:", i + 1, "loss:", loss.item())
             if (i+1) % 100 == 0:
-                torch.save(cnn.state_dict(), "./model.pkl")   # current is model.pkl
+                torch.save(cnn.state_dict(), "model.pkl")   # current is model.pkl
                 print("save model")
-                print("epoch:", epoch, "step:", i, "loss:", loss.item())
+                # print("epoch:", epoch, "step:", i, "loss:", loss.item())
 
-    torch.save(cnn.state_dict(), "./model.pkl")   # current is model.pkl
+    torch.save(cnn.state_dict(), "model.pkl")   # current is model.pkl
     print("save last model")
 
 

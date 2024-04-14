@@ -1,4 +1,6 @@
 .idea
+data_n/train
+data_n/test
 data/train
 data/test
 # Byte-compiled / optimized / DLL files

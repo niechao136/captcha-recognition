@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 import random
 from captcha.image import ImageCaptcha
@@ -16,10 +17,10 @@ def random_captcha():
 
 # 生成验证码图片
 def gen_captcha_text_and_image():
-    w = int(random.random() * 80) + 120
-    h = int(random.random() * 30) + 50
-    # w = 160
-    # h = 60
+    # w = int(random.random() * 80) + 120
+    # h = int(random.random() * 30) + 50
+    w = 160
+    h = 60
     captcha = ImageCaptcha(width=w, height=h)
     captcha_text = random_captcha()
     captcha_image = Image.open(captcha.generate(captcha_text))
@@ -27,9 +28,9 @@ def gen_captcha_text_and_image():
 
 
 if __name__ == '__main__':
-    count = 10000
-    # path = TRAIN_DATASET_PATH
-    path = TEST_DATASET_PATH
+    count = 100000
+    path = TRAIN_DATASET_PATH
+    # path = TEST_DATASET_PATH
     if not os.path.exists(path):
         os.makedirs(path)
     for i in range(count):
@@ -37,4 +38,4 @@ if __name__ == '__main__':
         filename = '%.5d' % i + '_' + text + '.jpg'
         image.save(path + os.path.sep + filename)
         if (i + 1) % 100 == 0:
-            print('saved %d images' % (i + 1))
+            print('generate %d images' % (i + 1))

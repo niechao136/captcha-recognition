@@ -30,7 +30,7 @@ class SPPLayer(nn.Module):
             pooling = (math.floor((kernel_size[0] * level - h + 1) / 2),
                        math.floor((kernel_size[1] * level - w + 1) / 2))
 
-            # update input data with padding
+            # update input data_n with padding
             zero_pad = torch.nn.ZeroPad2d((pooling[1], pooling[1], pooling[0], pooling[0]))
             x_new = zero_pad(x)
 
@@ -61,7 +61,7 @@ class CaptchaCNN(nn.Module):
         self.spp_level = spp_level
         self.num_grids = 0
         for i in range(spp_level):
-            self.num_grids += 2 ** (i * 2)
+            self.num_grids += (i + 1) ** 2
         self.layer1 = nn.Sequential(
             nn.Conv2d(1, 32, kernel_size=3, padding=1),
             nn.BatchNorm2d(32),
@@ -84,7 +84,7 @@ class CaptchaCNN(nn.Module):
         self.spp_layer = SPPLayer(spp_level)
 
         self.fc = nn.Sequential(
-            nn.Linear(14 * 64, 1024),
+            nn.Linear(self.num_grids * 64, 1024),
             nn.Dropout(0.5),  # drop 50% of the neuron
             nn.ReLU())
         self.rfc = nn.Sequential(

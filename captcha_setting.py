@@ -6,7 +6,7 @@ ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-ALL_CHAR_SET = NUMBER  # + ALPHABET
+ALL_CHAR_SET = NUMBER + ALPHABET
 ALL_CHAR_SET_LEN = len(ALL_CHAR_SET)
 MAX_CAPTCHA = 4
 

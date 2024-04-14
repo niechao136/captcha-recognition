@@ -40,5 +40,5 @@ def decode(vector):
 
 
 if __name__ == '__main__':
-    e = encode("BK7H")
+    e = encode("4133")
     print(e, decode(e))

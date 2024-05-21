@@ -40,4 +40,4 @@ async def uploadfile(file: UploadFile = File(...)):
     return {'predict': predict_label}
 
 
-app.mount('/', StaticFiles(directory='.', html=True))
+app.mount('/', StaticFiles(directory='./web/www', html=True))

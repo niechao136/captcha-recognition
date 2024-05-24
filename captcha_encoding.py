@@ -13,19 +13,19 @@ def char2pos(char):
     return k
 
 
-def encode(text):
-    vector = np.zeros(ALL_CHAR_SET_LEN * MAX_CAPTCHA, dtype=float)
+def encode(text, set_len=ALL_CHAR_SET_LEN):
+    vector = np.zeros(set_len * MAX_CAPTCHA, dtype=float)
     for i, c in enumerate(text):
-        idx = i * ALL_CHAR_SET_LEN + char2pos(c)
+        idx = i * set_len + char2pos(c)
         vector[idx] = 1.0
     return vector
 
 
-def decode(vector):
+def decode(vector, set_len=ALL_CHAR_SET_LEN):
     char_pos = vector.nonzero()[0]
     text = []
     for i, c in enumerate(char_pos):
-        char_idx = c % ALL_CHAR_SET_LEN
+        char_idx = c % set_len
         if char_idx < 10:
             char_code = char_idx + ord('0')
         elif char_idx < 36:

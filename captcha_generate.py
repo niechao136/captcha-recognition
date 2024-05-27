@@ -25,12 +25,12 @@ def gen_captcha_text_and_image(is_spp=False, max=MAX_CAPTCHA, char_set=ALL_CHAR_
     return captcha_text, captcha_image
 
 
-def generate_captcha_image(num=10000, path=TRAIN_DATASET_PATH, is_spp=False, max=MAX_CAPTCHA, char_set=ALL_CHAR_SET):
+def generate_captcha_image(num=100000, path=TRAIN_DATASET_PATH, is_spp=False, max=MAX_CAPTCHA, char_set=ALL_CHAR_SET):
     if not os.path.exists(path):
         os.makedirs(path)
     for i in range(num):
         text, image = gen_captcha_text_and_image(is_spp=is_spp, max=max, char_set=char_set)
-        filename = '%.5d' % i + '_' + text + '.jpg'
+        filename = '%.6d' % i + '_' + text + '.jpg'
         image.save(path + os.path.sep + filename)
         if (i + 1) % 100 == 0:
             print('generate %d images' % (i + 1))

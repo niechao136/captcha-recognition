@@ -4,7 +4,7 @@ from torch.autograd import Variable
 from dataset import get_train_data_loader
 from model import CNN
 
-num_epochs = 20
+num_epochs = 10
 batch_size = 100
 learning_rate = 0.001
 

@@ -16,20 +16,20 @@ def random_captcha(max=MAX_CAPTCHA, char_set=ALL_CHAR_SET):
 
 
 # 生成验证码图片
-def gen_captcha_text_and_image(is_spp=False, max=MAX_CAPTCHA, char_set=ALL_CHAR_SET):
-    w = int(random.random() * 80) + 120 if is_spp else 160
-    h = int(random.random() * 30) + 50 if is_spp else 60
-    captcha = ImageCaptcha(width=w, height=h)
+def gen_captcha_text_and_image(max=MAX_CAPTCHA, char_set=ALL_CHAR_SET, width=160, height=60):
+    captcha = ImageCaptcha(width=width, height=height)
     captcha_text = random_captcha(max=max, char_set=char_set)
     captcha_image = Image.open(captcha.generate(captcha_text))
     return captcha_text, captcha_image
 
 
-def generate_captcha_image(num=100000, path=TRAIN_DATASET_PATH, is_spp=False, max=MAX_CAPTCHA, char_set=ALL_CHAR_SET):
+def generate_captcha_image(num=64000, path=TRAIN_DATASET_PATH, is_spp=False, max=MAX_CAPTCHA, char_set=ALL_CHAR_SET):
     if not os.path.exists(path):
         os.makedirs(path)
     for i in range(num):
-        text, image = gen_captcha_text_and_image(is_spp=is_spp, max=max, char_set=char_set)
+        w = int(random.random() * 80) + 120 if is_spp and path == TEST_DATASET_PATH else 160
+        h = int(random.random() * 30) + 50 if is_spp and path == TEST_DATASET_PATH else 60
+        text, image = gen_captcha_text_and_image(width=w, height=h, max=max, char_set=char_set)
         filename = '%.6d' % i + '_' + text + '.jpg'
         image.save(path + os.path.sep + filename)
         if (i + 1) % 100 == 0:

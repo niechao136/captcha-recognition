@@ -36,7 +36,7 @@ trans = transforms.Compose([
 
 def get_train_data_loader():
     dataset = CaptchaDateset(TRAIN_DATASET_PATH, transform=trans)
-    return DataLoader(dataset, batch_size=1, shuffle=True)
+    return DataLoader(dataset, batch_size=64, shuffle=True)
 
 
 def get_test_data_loader():

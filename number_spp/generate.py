@@ -4,7 +4,7 @@ from setting import ALL_CHAR_SET
 
 
 if __name__ == '__main__':
-    is_train = True
+    is_train = False
     if is_train:
         generate_captcha_image(path=TRAIN_DATASET_PATH, max=MAX_CAPTCHA, char_set=ALL_CHAR_SET, is_spp=True)
     else:

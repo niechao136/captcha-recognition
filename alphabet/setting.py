@@ -1,5 +1,6 @@
 
-from captcha_setting import NUMBER
+from captcha_setting import NUMBER, LOWER_ALPHABET, UPPER_ALPHABET
 
-
+ALL_CHAR_SET = NUMBER + LOWER_ALPHABET + UPPER_ALPHABET
+ALL_CHAR_SET_LEN = len(ALL_CHAR_SET)
 
